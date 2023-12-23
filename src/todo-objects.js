@@ -55,4 +55,26 @@ class ToDoList {
     }
 }
 
-export {ToDoItem,ToDoList};
+class ListList {
+    constructor(){
+        this.indexID=300;
+        this.listArray = [];
+    }
+    addList(listTittle){
+        const todoListElement = new ToDoList(listTittle,this.indexID);
+        this.listArray.push(todoListElement);
+        this.indexID++;
+    }
+    eliminateList(ID){
+        let indexToEliminate = this.listArray.findIndex((list) => list.ID==ID);
+        this.listArray.splice(indexToEliminate,1);
+    }
+    showList(){
+        console.table(this.listArray);
+    }
+    getLastList(){
+        return this.listArray[this.listArray.length-1];
+    }
+}
+
+export {ToDoItem,ToDoList,ListList};
