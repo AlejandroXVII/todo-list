@@ -63,11 +63,24 @@ class ListList {
     addList(listTittle){
         const todoListElement = new ToDoList(listTittle,this.indexID);
         this.listArray.push(todoListElement);
+
+        if(localStorage.getItem('ToDoList') == null) {
+            localStorage.setItem("ToDoList","[]");
+        }
+        let old_date = JSON.parse(localStorage.getItem("ToDoList"));
+        old_date.push(todoListElement);
+        console.log(old_date);
+        localStorage.setItem("ToDoList",JSON.stringify(old_date));
+       
         this.indexID++;
     }
     eliminateList(ID){
         let indexToEliminate = this.listArray.findIndex((list) => list.ID==ID);
         this.listArray.splice(indexToEliminate,1);
+    }
+    editList(NewName,ID){
+        let indexToEdit= this.listArray.findIndex((list) => list.ID==ID);
+        this.listArray[indexToEdit].edit(NewName);
     }
     showList(){
         console.table(this.listArray);

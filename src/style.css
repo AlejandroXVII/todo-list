@@ -13,6 +13,7 @@
     --tex-color-description: #bdbdbd;
     --icon-color: #EFEFEF;
     --shadow: 0px 0px 25px -10px black;
+    --input-height: 25px;
 
     /*SIZE*/
     --icon-size: 25px;
@@ -134,13 +135,13 @@ header{
         grid-template-columns: 1fr auto auto;
         grid-template-rows: auto auto;
         margin: 10px 0 0 0;
-        row-gap: var(--gap-min);
+        gap: var(--gap-min);
         input{
             grid-column: 1 / -1;
             border: 0;
             background: var(--background-color);
             gap: calc(var(--gap-min)*0.5);
-            box-shadow: var(--shadow);
+            height: var(--input-height);
         }
         input:focus {
             color: var(--tex-color-principal);
@@ -151,10 +152,10 @@ header{
         .todo-list-button{
             border: 0;
             color: var(--tex-color-principal);
-            background-color: var(white);
-            font-weight: bold;
+            background-color: white;
             text-align: start;     
             background-color: var(--background-color);
+            padding: var(--gap-min);
         }
         #save-button{
             grid-column: 2;
@@ -191,3 +192,43 @@ footer{
     }
 }
 
+dialog{
+    background: var(--background-dark-color);
+    border: 0;
+    padding: var(--padding);
+    #edit-list-form{
+        display: grid;
+        grid-template-columns: 1fr auto auto;
+        grid-template-rows: auto auto auto;
+        color: var(--tex-color-principal);
+        font-weight: bold;
+        gap: var(--gap-min);
+        label{
+            grid-column: 1/-1;
+        }
+        input{
+            grid-column: 1/-1;
+            border: 0;
+            border: 1px solid var(--tex-color-description);
+            height: 20px;
+        }
+        button{
+            padding: var(--gap-min);
+            background: white;
+            border: 0;
+        }
+        .submit-button{
+            grid-column: 2;
+            border-bottom: var(--border-size) solid var(--tertiary-color);
+        }
+        .cancel-button{
+            grid-column: 3;
+            border-bottom: var(--border-size) solid var(--cancel-color);
+        }
+
+    }
+}
+
+dialog::backdrop {
+    backdrop-filter: blur(7px);
+}
