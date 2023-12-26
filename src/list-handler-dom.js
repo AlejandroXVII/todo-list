@@ -1,12 +1,14 @@
 import { ToDoItem,ToDoList,ListList } from './todo-objects';
+import { LocalStore } from './local-store-handler';
 
-const listOBJ =new ListList();
+const listLocalStore = new LocalStore();
 
-const addListTodoItemToTheDoom = (todoListElement,listOBJArray) => {
+const addListTodoItemToTheDoom = (todoListElement,listOBJarray) => {
     function delateListTodoItem(event) {
         document.querySelector('#list-container>.'+this.id).remove();
         event.stopPropagation();
-        listOBJArray.eliminateList(this.id.replace('list-',''));
+        listOBJarray.eliminateList(this.id.replace('list-',''));
+        listLocalStore.updateLocalStore(listOBJarray);
     }
     function editListTodoItem(event) {
         let $editListDialog = document.getElementById("edit-list-dialog");
@@ -36,8 +38,9 @@ const addListTodoItemToTheDoom = (todoListElement,listOBJArray) => {
             if (editedListItem!=='') { //HERE IS WHERE IT EDIT THE LIST
                 $listText.textContent = editedListItem;
                 $editListDialog.close();
-                listOBJ.editList(editedListItem,$editListDialog.className);
-                //console.log($listText);
+                console.log(listOBJarray);
+                listOBJarray.editList(editedListItem,$editListDialog.className);
+                listLocalStore.updateLocalStore(listOBJarray);
                 $editListDialog.className='';
                 $formEditList.reset();
             }else{
@@ -75,6 +78,7 @@ const addListTodoItemButtonsHandler = () => {
     const $inputList = document.querySelector('#todo-list-input');
     const $cancelButton = document.querySelector('#cancel-button');
     const $formList = document.querySelector('#add-list-form');
+    const listOBJ = listLocalStore.getListList();
 
     function showAddListContainer() {
         $inputList.style.outline = 'none';
@@ -89,12 +93,13 @@ const addListTodoItemButtonsHandler = () => {
     const saveListItem = event => {
         const formData = new FormData(event.target);
         const listItem = formData.get('todo-list-input');
-
+        
         if (listItem!=='') { //HERE IS WHERE ACTUALLY SAVE ITEMS
             $inputList.style.outline = 'none';
             hideAddListContainer();
             listOBJ.addList(listItem);
             listOBJ.showList();
+            listLocalStore.updateLocalStore(listOBJ);
             addListTodoItemToTheDoom(listOBJ.getLastList(),listOBJ);
         }else{
             $inputList.style.outline = '1.5px solid red';
@@ -103,9 +108,9 @@ const addListTodoItemButtonsHandler = () => {
         event.preventDefault();
     }
 
+    $addListButton.addEventListener('click',showAddListContainer);
     $cancelButton.addEventListener('click',hideAddListContainer);
     $formList.addEventListener('submit', saveListItem);
-    $addListButton.addEventListener('click',showAddListContainer);
 }
 
 export {addListTodoItemButtonsHandler,addListTodoItemToTheDoom};
