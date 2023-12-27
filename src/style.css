@@ -168,6 +168,22 @@ header{
     }
 }
 
+main{
+    position: relative;
+    #add-todo-button{
+        position: absolute;
+        display: none;
+        right: 7px;
+        bottom: 7px;
+        border: 0;
+        margin: 0;
+        svg{
+            fill: var(--tertiary-color);
+            height: var(--logo-size);
+        }
+    }
+}
+
 footer{
     grid-column: 1 / -1;
     display: grid;
@@ -196,36 +212,56 @@ dialog{
     background: var(--background-dark-color);
     border: 0;
     padding: var(--padding);
+    color: var(--tex-color-principal);
+    font-weight: bold;
     #edit-list-form{
         display: grid;
         grid-template-columns: 1fr auto auto;
         grid-template-rows: auto auto auto;
-        color: var(--tex-color-principal);
-        font-weight: bold;
+        align-items: center;
         gap: var(--gap-min);
         label{
             grid-column: 1/-1;
         }
         input{
             grid-column: 1/-1;
-            border: 0;
-            border: 1px solid var(--tex-color-description);
-            height: 20px;
-        }
-        button{
-            padding: var(--gap-min);
-            background: white;
-            border: 0;
         }
         .submit-button{
             grid-column: 2;
-            border-bottom: var(--border-size) solid var(--tertiary-color);
         }
         .cancel-button{
             grid-column: 3;
-            border-bottom: var(--border-size) solid var(--cancel-color);
         }
-
+    }
+    #add-todo-form{
+        display: grid;
+        grid-template-columns: auto auto;
+        grid-template-rows: repeat(6 1fr);
+        align-items: center;
+        gap: var(--gap-min);
+        div{
+            grid-column: -2 / -1;
+            justify-self: end;
+        }
+        label{
+            justify-self: end;
+        }
+    }
+    input{
+        border: 0;
+        border: 1px solid var(--tex-color-description);
+        height: 20px;
+    }
+    button{
+        padding: var(--gap-min);
+        background: white;
+        border: 0;
+    }
+    .submit-button{
+        border-bottom: var(--border-size) solid var(--tertiary-color);
+    }
+    .cancel-button{
+        border-bottom: var(--border-size) solid var(--cancel-color);
     }
 }
 

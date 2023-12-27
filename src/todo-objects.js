@@ -29,11 +29,11 @@ class ToDoItem {
 }
 
 class ToDoList {
-    constructor(tittle,ID){
+    constructor(tittle,ID,toDoID,toDoArray){
         this.tittle = tittle;
         this.ID = ID;
-        this.toDoID=100;
-        this.toDoArray = [];
+        this.toDoID=toDoID;
+        this.toDoArray = toDoArray;
     }
     edit(tittle){
         this.tittle = tittle;
@@ -61,17 +61,8 @@ class ListList {
         this.listArray = [];
     }
     addList(listTittle){
-        const todoListElement = new ToDoList(listTittle,this.indexID);
+        const todoListElement = new ToDoList(listTittle,this.indexID,100,[]);
         this.listArray.push(todoListElement);
-
-        /*if(localStorage.getItem('ToDoList') == null) {
-            localStorage.setItem("ToDoList","[]");
-        }
-        let old_date = JSON.parse(localStorage.getItem("ToDoList"));
-        old_date.push(todoListElement);
-        console.log(old_date);
-        localStorage.setItem("ToDoList",JSON.stringify(old_date));*/
-       
         this.indexID++;
     }
     eliminateList(ID){
@@ -98,3 +89,11 @@ class ListList {
 }
 
 export {ToDoItem,ToDoList,ListList};
+
+       /*if(localStorage.getItem('ToDoList') == null) {
+            localStorage.setItem("ToDoList","[]");
+        }
+        let old_date = JSON.parse(localStorage.getItem("ToDoList"));
+        old_date.push(todoListElement);
+        console.log(old_date);
+        localStorage.setItem("ToDoList",JSON.stringify(old_date));*/

@@ -1,4 +1,4 @@
-import { ToDoList,ListList } from './todo-objects';
+import { ToDoList,ListList, ToDoItem } from './todo-objects';
 
 class LocalStore{
     constructor(){
@@ -12,7 +12,20 @@ class LocalStore{
             let todoList = [];
 
             for (let index = 0; index <  list.listArray.length; index++) {
-                todoList.push(new ToDoList(list.listArray[index].tittle,list.listArray[index].ID));
+                let todoListArray = [];
+                for (let index2 = 0; index2 <  list.listArray[index].toDoArray.length; index2++) {
+                    let todoItem = new ToDoItem(list.listArray[index].toDoArray[index2].tittle,
+                        list.listArray[index].toDoArray[index2].description,
+                        list.listArray[index].toDoArray[index2].completeStatus,
+                        list.listArray[index].toDoArray[index2].date,
+                        list.listArray[index].toDoArray[index2].priority);
+                    todoListArray.push(todoItem);
+                }
+                
+                todoList.push(new ToDoList(list.listArray[index].tittle,
+                    list.listArray[index].ID,
+                    list.listArray[index].toDoID,
+                    todoListArray));
             }
             console.log(todoList);
             this.listList.setAll(list.indexID,todoList);

@@ -1,5 +1,5 @@
-import { ToDoItem,ToDoList,ListList } from './todo-objects';
 import { LocalStore } from './local-store-handler';
+import { addTodoItemHandler } from './todo-handler-dom';
 
 const listLocalStore = new LocalStore();
 
@@ -54,22 +54,43 @@ const addListTodoItemToTheDoom = (todoListElement,listOBJarray) => {
         $formEditList.addEventListener('submit',saveEditItem);
         event.stopPropagation();
     }
-    //CREATE AND INSERT LIST IN THE DOM
-    const $listContainer = document.querySelector('#list-container');
-    const $listElementContainer = document.createElement('div');
-    $listElementContainer.className = "secondary-button hover-button temporal-button list-"+ todoListElement.getID();
-    $listContainer.appendChild($listElementContainer);
-    const $nameElement = document.createElement('p');
-    $nameElement.textContent = todoListElement.getTittle();
-    $listElementContainer.appendChild($nameElement);
 
+    function selectList(event) {
+        const $mainContainer = document.querySelector('#main-container')
+        if (document.querySelector('#main-container>p')!= null) {
+            document.querySelector('#main-container>p').remove();
+        }
+
+        const $nameList = document.createElement('p');
+
+        $nameList.textContent = todoListElement.getTittle();
+
+        $mainContainer.appendChild($nameList);
+        document.querySelector('#add-todo-button').style.display = 'flex';
+        addTodoItemHandler(todoListElement,listOBJarray);
+
+        event.stopPropagation();
+    }
+    //CREATE AND INSERT LIST IN THE DOM
+    //select container
+    const $listContainer = document.querySelector('#list-container');
+    //create elements 
+    const $listElementContainer = document.createElement('div');
+    const $nameElement = document.createElement('p');
+    //add properties 
+    $listElementContainer.className = "secondary-button hover-button temporal-button list-"+ todoListElement.getID();
+    $nameElement.textContent = todoListElement.getTittle();
+    //insert elements on the DOM
+    $listContainer.appendChild($listElementContainer);
+    $listElementContainer.appendChild($nameElement);
     $listElementContainer.innerHTML += '<svg id=list-'+ todoListElement.getID() +' class="edit-button list-'+ todoListElement.getID() +'" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>pencil-outline</title><path d="M14.06,9L15,9.94L5.92,19H5V18.08L14.06,9M17.66,3C17.41,3 17.15,3.1 16.96,3.29L15.13,5.12L18.88,8.87L20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18.17,3.09 17.92,3 17.66,3M14.06,6.19L3,17.25V21H6.75L17.81,9.94L14.06,6.19Z" /></svg>';
     $listElementContainer.innerHTML += '<svg id=list-'+ todoListElement.getID() +' class="delate-button list-'+ todoListElement.getID() +'" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>trash-can-outline</title><path d="M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M7,6H17V19H7V6M9,8V17H11V8H9M13,8V17H15V8H13Z" /></svg>';
-    
+    //add listeners
     const $trashButton = document.querySelector('.list-'+todoListElement.getID()+'>.delate-button');
-    $trashButton.addEventListener('click',delateListTodoItem);
     const $edithButton = document.querySelector('.list-'+todoListElement.getID()+'>.edit-button');
+    $trashButton.addEventListener('click',delateListTodoItem);
     $edithButton.addEventListener('click',editListTodoItem);
+    $listElementContainer.addEventListener('click',selectList);
 }
 
 const addListTodoItemButtonsHandler = () => {
@@ -113,4 +134,4 @@ const addListTodoItemButtonsHandler = () => {
     $formList.addEventListener('submit', saveListItem);
 }
 
-export {addListTodoItemButtonsHandler,addListTodoItemToTheDoom};
+export { addListTodoItemButtonsHandler,addListTodoItemToTheDoom };

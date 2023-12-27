@@ -1,6 +1,5 @@
 import { addListTodoItemToTheDoom } from './list-handler-dom';
 import { LocalStore } from './local-store-handler';
-import { ToDoItem,ToDoList,ListList } from './todo-objects';
 
 const loadListElements = () => {
     const listLocalStore = new LocalStore();
