@@ -73,11 +73,10 @@ const addListTodoItemToTheDoom = (todoListElement,listOBJarray) => {
         let saveTodoItem = event => {
             if(todoListElement.getID() == document.querySelector('#main-container>p').className){
                 addTodoItemHandler(todoListElement,listOBJarray,event);
-                console.log(todoListElement);
+                hideAddTodoDialog();
                 event.preventDefault();
             }
         }
-        //----------------------------------------------------------
         let $mainContainer = document.querySelector('#main-container')
 
         if (document.querySelector('#main-container>p')!= null) {
@@ -95,9 +94,8 @@ const addListTodoItemToTheDoom = (todoListElement,listOBJarray) => {
         $mainContainer.appendChild($listMainContainer);
 
         document.querySelector('#add-todo-button').style.display = 'flex';
-        firstLoadTodo(todoListElement);
-        //addTodoItemHandler(todoListElement,listOBJarray);
-        $formTodo.addEventListener('submit', saveTodoItem);//*
+        firstLoadTodo(todoListElement,listOBJarray);
+        $formTodo.addEventListener('submit', saveTodoItem);
         event.stopPropagation();
     }
     //CREATE AND INSERT LIST IN THE DOM
@@ -120,8 +118,8 @@ const addListTodoItemToTheDoom = (todoListElement,listOBJarray) => {
     $trashButton.addEventListener('click',delateListTodoItem);
     $edithButton.addEventListener('click',editListTodoItem);
     $listElementContainer.addEventListener('click',selectList);
-    $addTodoButton.addEventListener('click',showAddTodoDialog);//*
-    $cancelButton.addEventListener('click',hideAddTodoDialog);//*
+    $addTodoButton.addEventListener('click',showAddTodoDialog);
+    $cancelButton.addEventListener('click',hideAddTodoDialog);
     
 }
 

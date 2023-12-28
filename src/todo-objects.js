@@ -37,6 +37,9 @@ class ToDoItem {
     assignIndex(ID){
         this.ID=ID;
     }
+    getID(){
+        return this.ID;
+    }
 }
 
 class ToDoList {

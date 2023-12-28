@@ -28,7 +28,6 @@ class LocalStore{
                     list.listArray[index].toDoID,
                     todoListArray));
             }
-            console.log(todoList);
             this.listList.setAll(list.indexID,todoList);
         }
     }
