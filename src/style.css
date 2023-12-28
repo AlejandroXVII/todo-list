@@ -175,12 +175,19 @@ main{
         gap: var(--gap);
         margin: var(--margin);
     }
+    #list-name{
+        color: var(--tex-color-principal);
+        text-align: center;
+        font-size: var(--text-size-principal);
+        font-weight: bold;
+    }
     .todo-element {
         background: white;
         display: grid;
-        grid-template-columns: 1fr 3fr 1fr 1fr 1fr auto auto;
+        grid-template-columns: 1fr 3fr auto auto 7ch auto auto;
         align-items: center;
         height: 30px;
+        gap: var(--gap-min);
         box-shadow: 5px 5px 10px -10px black;
         padding: var(--gap-min);
         p{
@@ -256,7 +263,7 @@ dialog{
             grid-column: 3;
         }
     }
-    #add-todo-form{
+    .todo-form{
         display: grid;
         grid-template-columns: auto auto;
         grid-template-rows: repeat(6 1fr);
@@ -268,6 +275,9 @@ dialog{
         }
         label{
             justify-self: end;
+        }
+        fieldset{
+            grid-column: 1 / -1;
         }
     }
     input{

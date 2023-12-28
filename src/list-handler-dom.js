@@ -81,17 +81,18 @@ const addListTodoItemToTheDoom = (todoListElement,listOBJarray) => {
 
         if (document.querySelector('#main-container>p')!= null) {
             document.querySelector('#main-container>p').remove();
-            document.querySelector('.main-inner-container').remove();
+            //document.querySelector('.main-inner-container').remove();//*
         }
 
         let $nameList = document.createElement('p');
         $nameList.className = todoListElement.getID();
+        $nameList.id = "list-name";
         $nameList.textContent = todoListElement.getTittle();
         $mainContainer.appendChild($nameList);
 
-        let $listMainContainer = document.createElement('div');
-        $listMainContainer.className = 'main-inner-container';
-        $mainContainer.appendChild($listMainContainer);
+        //let $listMainContainer = document.createElement('div');
+        //$listMainContainer.className = 'main-inner-container';
+        //$mainContainer.appendChild($listMainContainer);
 
         document.querySelector('#add-todo-button').style.display = 'flex';
         firstLoadTodo(todoListElement,listOBJarray);
@@ -120,7 +121,6 @@ const addListTodoItemToTheDoom = (todoListElement,listOBJarray) => {
     $listElementContainer.addEventListener('click',selectList);
     $addTodoButton.addEventListener('click',showAddTodoDialog);
     $cancelButton.addEventListener('click',hideAddTodoDialog);
-    
 }
 
 const addListTodoItemButtonsHandler = () => {
@@ -130,6 +130,11 @@ const addListTodoItemButtonsHandler = () => {
     const $cancelButton = document.querySelector('#cancel-button');
     const $formList = document.querySelector('#add-list-form');
     const listOBJ = listLocalStore.getListList();
+
+    function showAddListContainer() {
+        $inputList.style.outline = 'none';
+        $addListContainer.style.display = "grid";
+    }
 
     function showAddListContainer() {
         $inputList.style.outline = 'none';

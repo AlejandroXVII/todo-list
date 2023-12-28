@@ -6,6 +6,7 @@ class LocalStore{
         this.emptyListStatus = false; //TRUE if it's empty FALSE if it has any element
         if(localStorage.getItem('ListList') == null) {
             this.emptyListStatus = true; 
+            this.listList.addList('Default');
         }
         else{
             let list = JSON.parse(localStorage.getItem("ListList"));

@@ -5,13 +5,14 @@ class ToDoItem {
         this.tittle=tittle; 
         this.description=description;
         this.completeStatus=completeStatus;
-        this.date=new Date(date);
+        this.date=format(new Date(date), "yyyy-MM-dd");
         this.priority=priority;
         this.ID=ID;
     }
-    edit(tittle,description,date,priority){
+    edit(tittle,description,completeStatus,date,priority){
         this.tittle=tittle; 
         this.description=description;
+        this.completeStatus=completeStatus;
         this.date=date;
         this.priority=priority;
     }

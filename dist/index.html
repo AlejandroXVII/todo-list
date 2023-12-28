@@ -15,10 +15,11 @@
         </header>
         <div id="sidebar">
             <div>
-                <button class="principal-button permanent-button">Home</button>
+                <!--<button class="principal-button permanent-button">Home</button>
                 <button class="secondary-button hover-button permanent-button" id="all-task-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>earth</title><path d="M17.9,17.39C17.64,16.59 16.89,16 16,16H15V13A1,1 0 0,0 14,12H8V10H10A1,1 0 0,0 11,9V7H13A2,2 0 0,0 15,5V4.59C17.93,5.77 20,8.64 20,12C20,14.08 19.2,15.97 17.9,17.39M11,19.93C7.05,19.44 4,16.08 4,12C4,11.38 4.08,10.78 4.21,10.21L9,15V16A2,2 0 0,0 11,18M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" /></svg>All Tasks</button>
                 <button class="secondary-button hover-button permanent-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>calendar-today</title><path d="M7,10H12V15H7M19,19H5V8H19M19,3H18V1H16V3H8V1H6V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3Z" /></svg>Today</button>
                 <button class="secondary-button hover-button permanent-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>calendar-range</title><path d="M9,10H7V12H9V10M13,10H11V12H13V10M17,10H15V12H17V10M19,3H18V1H16V3H8V1H6V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M19,19H5V8H19V19Z" /></svg>This Week</button>
+                -->
                 <button class="principal-button permanent-button">Todo Lists</button>
                 <div id="list-container"></div>
                 <div id="add-list-container">
@@ -53,20 +54,60 @@
             </form>
         </dialog>
         <dialog id="add-todo-dialog">
-            <form id='add-todo-form' method="add-todo-form">
+            <form class="todo-form" id='add-todo-form' method="add-todo-form">
                 <label for="tittle-todo-input">Tittle</label>
                 <input type="text" id="tittle-todo-input" name="tittle-todo-input" required/>
                 <label for="description-todo-input">Description</label>
-                <input type="text" id="description-todo-input" name="description-todo-input"/>
-                <label for="complete-status-todo-input">Status</label>
-                <input type="text" id="complete-status-todo-input" name="complete-status-todo-input"/>
+                <input type="text" id="description-todo-input" name="description-todo-input"required/>
                 <label for="date-todo-input">Date</label>
-                <input type="text" id="date-todo-input" name="date-todo-input"/>
-                <label for="priority-todo-input">Priority</label>
-                <input type="text" id="priority-todo-input" name="priority-todo-input"/>
+                <input type="date" id="date-todo-input" name="date-todo-input"required/>
+                <fieldset>
+                    <legend>Status:</legend>
+                    <div>
+                        <input class="complete-status-todo-inpu" name="complete-status-todo-input" type="radio" value="incomplete" checked="checked"/>incomplete
+                        <input class="complete-status-todo-inpu" name="complete-status-todo-input" type="radio" value="completed" />completed 
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>Priority:</legend>
+                    <div>
+                        <input class="priority-todo-input" name="priority-todo-input" type="radio" value="low" checked="checked"/>low
+                        <input class="priority-todo-input" name="priority-todo-input" type="radio" value="medium" />medium
+                        <input class="priority-todo-input" name="priority-todo-input" type="radio" value="high" />high
+                    </div>
+                </fieldset>
                 <div>
                     <button class='submit-button' id="save-new-todo">Confirm</button>
                     <button class='cancel-button' id="cancel-new-todo" type="reset">Cancel</button>
+                </div>
+            </form>
+        </dialog>
+        <dialog id="edit-todo-dialog">
+            <form class="todo-form" id='edit-todo-form' method="edit-todo-form">
+                <label for="tittle-todo-edit-input">Tittle</label>
+                <input type="text" id="tittle-todo-edit-input" name="tittle-todo-edit-input" required/>
+                <label for="description-todo-edit-input">Description</label>
+                <input type="text" id="description-todo-edit-input" name="description-todo-edit-input"required/>
+                <label for="date-todo-edit-input">Date</label>
+                <input type="date" id="date-todo-edit-input" name="date-todo-edit-input"required/>
+                <fieldset>
+                    <legend>Status:</legend>
+                    <div>
+                        <input class="complete-status-todo-edit-inpu" name="complete-status-todo-edit-input" type="radio" value="incomplete" />incomplete
+                        <input class="complete-status-todo-edit-inpu" name="complete-status-todo-edit-input" type="radio" value="completed" />completed 
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>Priority:</legend>
+                    <div>
+                        <input class="priority-todo-edit-input" name="priority-todo-edit-input" type="radio" value="low" />low
+                        <input class="priority-todo-edit-input" name="priority-todo-edit-input" type="radio" value="medium" />medium
+                        <input class="priority-todo-edit-input" name="priority-todo-edit-input" type="radio" value="high" />high
+                    </div>
+                </fieldset>
+                <div>
+                    <button class='submit-button' id="save-edit-todo">Confirm</button>
+                    <button class='cancel-button' id="cancel-edit-todo" type="reset">Cancel</button>
                 </div>
             </form>
         </dialog>
