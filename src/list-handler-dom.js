@@ -1,9 +1,14 @@
 import { LocalStore } from './local-store-handler';
-import { addTodoItemHandler } from './todo-handler-dom';
+import { addTodoItemHandler,firstLoadTodo } from './todo-handler-dom';
 
 const listLocalStore = new LocalStore();
 
 const addListTodoItemToTheDoom = (todoListElement,listOBJarray) => {
+    let $addTodoDialog = document.getElementById("add-todo-dialog");
+    let $addTodoButton = document.querySelector('#add-todo-button');
+    let $cancelButton = document.querySelector('#cancel-new-todo');
+    let $formTodo = document.querySelector('#add-todo-form');
+
     function delateListTodoItem(event) {
         document.querySelector('#list-container>.'+this.id).remove();
         event.stopPropagation();
@@ -54,21 +59,45 @@ const addListTodoItemToTheDoom = (todoListElement,listOBJarray) => {
         $formEditList.addEventListener('submit',saveEditItem);
         event.stopPropagation();
     }
+    function showAddTodoDialog() {
+        $addTodoDialog.showModal();
+    }
+
+    function hideAddTodoDialog() {
+        $addTodoDialog.close();
+        $formTodo.reset();
+    }
 
     function selectList(event) {
-        const $mainContainer = document.querySelector('#main-container')
+
+        let saveTodoItem = event => {
+            if(todoListElement.getID() == document.querySelector('#main-container>p').className){
+                addTodoItemHandler(todoListElement,listOBJarray,event);
+                console.log(todoListElement);
+                event.preventDefault();
+            }
+        }
+        //----------------------------------------------------------
+        let $mainContainer = document.querySelector('#main-container')
+
         if (document.querySelector('#main-container>p')!= null) {
             document.querySelector('#main-container>p').remove();
+            document.querySelector('.main-inner-container').remove();
         }
 
-        const $nameList = document.createElement('p');
-
+        let $nameList = document.createElement('p');
+        $nameList.className = todoListElement.getID();
         $nameList.textContent = todoListElement.getTittle();
-
         $mainContainer.appendChild($nameList);
-        document.querySelector('#add-todo-button').style.display = 'flex';
-        addTodoItemHandler(todoListElement,listOBJarray);
 
+        let $listMainContainer = document.createElement('div');
+        $listMainContainer.className = 'main-inner-container';
+        $mainContainer.appendChild($listMainContainer);
+
+        document.querySelector('#add-todo-button').style.display = 'flex';
+        firstLoadTodo(todoListElement);
+        //addTodoItemHandler(todoListElement,listOBJarray);
+        $formTodo.addEventListener('submit', saveTodoItem);//*
         event.stopPropagation();
     }
     //CREATE AND INSERT LIST IN THE DOM
@@ -91,6 +120,9 @@ const addListTodoItemToTheDoom = (todoListElement,listOBJarray) => {
     $trashButton.addEventListener('click',delateListTodoItem);
     $edithButton.addEventListener('click',editListTodoItem);
     $listElementContainer.addEventListener('click',selectList);
+    $addTodoButton.addEventListener('click',showAddTodoDialog);//*
+    $cancelButton.addEventListener('click',hideAddTodoDialog);//*
+    
 }
 
 const addListTodoItemButtonsHandler = () => {

@@ -1,19 +1,30 @@
 import { compareAsc, format } from "date-fns";  
 
 class ToDoItem {
-    ID=0;
-    constructor(tittle,description,completeStatus,date,priority){
+    constructor(tittle,description,completeStatus,date,priority,ID){
         this.tittle=tittle; 
         this.description=description;
         this.completeStatus=completeStatus;
         this.date=new Date(date);
         this.priority=priority;
+        this.ID=ID;
     }
     edit(tittle,description,date,priority){
         this.tittle=tittle; 
         this.description=description;
         this.date=date;
         this.priority=priority;
+    }
+    getObjAsAnArray(){
+        let arrayObj = [];
+        arrayObj.push(this.tittle);
+        arrayObj.push(this.description);
+        arrayObj.push(this.completeStatus);
+        arrayObj.push(this.date);
+        arrayObj.push(this.priority);
+        arrayObj.push(this.ID);
+
+        return arrayObj;
     }
     changeStatus(){
         if (this.completeStatus) {
@@ -44,9 +55,14 @@ class ToDoList {
     getID(){
         return this.ID;
     }
+    getTodoID(){
+        return this.toDoID;
+    }
+    getTodoArray(){
+        return this.toDoArray;
+    }
     addToDo(toDo){
         this.toDoArray.push(toDo);
-        toDo.assignIndex(this.toDoID);
         this.toDoID++;
     }
     eliminateToDo(ID){

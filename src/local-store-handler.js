@@ -18,7 +18,8 @@ class LocalStore{
                         list.listArray[index].toDoArray[index2].description,
                         list.listArray[index].toDoArray[index2].completeStatus,
                         list.listArray[index].toDoArray[index2].date,
-                        list.listArray[index].toDoArray[index2].priority);
+                        list.listArray[index].toDoArray[index2].priority,
+                        list.listArray[index].toDoArray[index2].ID);
                     todoListArray.push(todoItem);
                 }
                 
